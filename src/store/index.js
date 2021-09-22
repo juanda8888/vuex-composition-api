@@ -24,6 +24,13 @@ export default createStore({
       }
     }
   },
+  getters: {
+    topPaisesPobalcion(state) {
+      return state.paises.sort((a, b) => 
+        a.area < b.area ? 1 : -1
+      )
+    }
+  },
   modules: {
   }
 })
