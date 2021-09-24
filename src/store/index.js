@@ -18,15 +18,20 @@ export default createStore({
       try {
         const res = await fetch('api.json')
         const data = await res.json()
-        commit('setPaises', data)
+        const countryData = data.map((item, index) => ({...item, id: index}))
+        commit('setPaises', countryData)
       } catch (error) {
-        
+        console.log(error)
       }
-    }
+    },
+    filtrarRegion({ commit, state }, region) {
+      const filtro = state.paises.filter(pais => pais.region.includes(region))
+      commit('setPaisesFiltrados', filtro)
+    },
   },
   getters: {
     topPaisesPobalcion(state) {
-      return state.paises.sort((a, b) => 
+      return state.paisesFiltrados.sort((a, b) => 
         a.area < b.area ? 1 : -1
       )
     }
