@@ -5,7 +5,9 @@
       v-for="pais in paises"
       :key="pais.id"
     >
-      <card :pais="pais" />
+      <card
+        v-if="pais"
+        :pais="pais" />
     </div>
   </div>
 </template>
@@ -18,7 +20,6 @@ import { useStore } from 'vuex'
 export default {
   components: { Card },
   setup() {
-   
     const store = useStore()
     const paises = computed(() => {
       return store.getters.topPaisesPobalcion
@@ -32,7 +33,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
